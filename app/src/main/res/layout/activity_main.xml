@@ -1,26 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.wear.widget.BoxInsetLayout
+<android.support.wear.widget.drawer.WearableDrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/dark_grey"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mein_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    tools:deviceIds="wear"
-    android:padding="@dimen/box_inset_layout_padding">
+    tools:deviceIds="wear">
 
-    <FrameLayout
+
+    <!-- Ausziehbare Menü-Schublade mit navigationStyle="multiPage", damit es für jeden Eintrag
+         eine eigene "Seite" gibt -->
+    <android.support.wear.widget.drawer.WearableNavigationDrawerView
+        android:id="@+id/navigation_drawer_oben"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/inner_frame_layout_padding"
-        app:boxedEdges="all">
+        app:navigationStyle="multiPage" />
 
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/hello_world" />
 
-    </FrameLayout>
-</androidx.wear.widget.BoxInsetLayout>
+    <!-- Eigentlicher Inhalt -->
+    <android.support.wear.widget.BoxInsetLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/platzhalter_inhalt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </android.support.wear.widget.BoxInsetLayout>
+
+</android.support.wear.widget.drawer.WearableDrawerLayout>
