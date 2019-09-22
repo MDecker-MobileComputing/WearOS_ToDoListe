@@ -11,6 +11,9 @@ import android.util.Log;
 import androidx.wear.widget.drawer.WearableDrawerController;
 import androidx.wear.widget.drawer.WearableNavigationDrawerView;
 
+import de.mide.wearos.todoliste.fragmente.NeuesTodoFragment;
+import de.mide.wearos.todoliste.fragmente.TodoListeFragment;
+
 
 /**
  * This project is licensed under the terms of the BSD 3-Clause License.
@@ -18,8 +21,18 @@ import androidx.wear.widget.drawer.WearableNavigationDrawerView;
 public class MainActivity extends WearableActivity
                           implements WearableNavigationDrawerView.OnItemSelectedListener {
 
+
     /** Tag für Log-Statements von allen Klassen der App. */
     public static final String TAG4LOGGING = "ToDoListe";
+
+    /** Dateiname der SharedPreferences-Datei. */
+    public static final String PREFERENCE_DATEINAME= "todos";
+
+    /**
+     * Key unter dem in der SharedPreferences-Datei ein Set<String> mit den ToDo-Einträgen
+     * abgelegt ist.
+     */
+    public static final String PREFERENCES_KEYS_TODOS = "todo_set";
 
 
     /**
@@ -31,7 +44,7 @@ public class MainActivity extends WearableActivity
 
     /**
      * Lifecycle-Methode, wird einmalig beim Start der Activity ausgefüllt.
-     * Setzt das {@link TodoListenFragment} in den Platzhalter ein.
+     * Setzt das {@link TodoListeFragment} in den Platzhalter ein.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +55,7 @@ public class MainActivity extends WearableActivity
         _fragmentManager = getFragmentManager();
 
         // Fragment einsetzen
-        Fragment todoFragment = new TodoListenFragment();
+        Fragment todoFragment = new TodoListeFragment();
 
         FragmentTransaction ft = _fragmentManager.beginTransaction();
         ft.replace(R.id.platzhalter_inhalt, todoFragment);
@@ -72,7 +85,19 @@ public class MainActivity extends WearableActivity
 
         Fragment fragmentNeu = null;
 
-        fragmentNeu = new TodoListenFragment();
+        switch (position) {
+
+            case 0:
+                fragmentNeu = new TodoListeFragment();
+            break;
+
+            case 1:
+                fragmentNeu = new NeuesTodoFragment();
+            break;
+
+            default:
+                Log.e(TAG4LOGGING, "Unerwarteter Wert für position=" + position);
+        }
 
         FragmentTransaction ft = _fragmentManager.beginTransaction();
         ft.replace(R.id.platzhalter_inhalt, fragmentNeu);
@@ -134,7 +159,7 @@ public class MainActivity extends WearableActivity
 
             switch (position) {
 
-                case 0: // TodoListenFragment
+                case 0: // TodoListeFragment
                     drawableID = R.drawable.ic_format_list_bulleted_black_24dp;
                     break;
 
@@ -149,10 +174,11 @@ public class MainActivity extends WearableActivity
             return getDrawable(drawableID);
         }
 
+
         /**
          * Methode zur Abfrage der Anzahl der Element/Fragmente in der Schublade.
          *
-         * @return  Anzahl der Elemente in der Schublade.
+         * @return  Anzahl der Elemente in der Schublade, immer 2.
          */
         @Override
         public int getCount() {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.wear.widget.drawer.WearableDrawerLayout
+<androidx.wear.widget.drawer.WearableDrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,7 +11,7 @@
 
     <!-- Ausziehbare Menü-Schublade mit navigationStyle="multiPage", damit es für jeden Eintrag
          eine eigene "Seite" gibt -->
-    <android.support.wear.widget.drawer.WearableNavigationDrawerView
+    <androidx.wear.widget.drawer.WearableNavigationDrawerView
         android:id="@+id/navigation_drawer_oben"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,15 +19,19 @@
 
 
     <!-- Eigentlicher Inhalt -->
+    <!--
     <android.support.wear.widget.BoxInsetLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+    -->
 
         <FrameLayout
             android:id="@+id/platzhalter_inhalt"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+    <!--
     </android.support.wear.widget.BoxInsetLayout>
+    -->
 
-</android.support.wear.widget.drawer.WearableDrawerLayout>
+</androidx.wear.widget.drawer.WearableDrawerLayout >
